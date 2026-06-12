@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { connection } from "next/server"
 
 import { getPublishedArticles } from "@/lib/articles"
 
@@ -13,7 +12,6 @@ function formatDate(date: Date | null) {
 }
 
 export async function RecentArticles() {
-  await connection()
   const articles = await getPublishedArticles()
   const recent = articles.slice(0, 5)
 
@@ -44,7 +42,6 @@ export async function RecentArticles() {
 }
 
 export async function ArticlesList() {
-  await connection()
   const articles = await getPublishedArticles()
 
   if (articles.length === 0) {

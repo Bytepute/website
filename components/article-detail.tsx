@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { connection } from "next/server"
 
 import { ArticleContent } from "@/components/article-content"
 import { getArticleBySlug } from "@/lib/articles"
@@ -20,7 +19,6 @@ export async function ArticleDetail({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  await connection()
   const article = await getArticleBySlug(slug)
 
   if (!article) {

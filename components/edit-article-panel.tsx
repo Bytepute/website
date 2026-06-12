@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { connection } from "next/server"
 
 import { ArticleForm, DeleteArticleForm, LogoutForm } from "@/components/article-form"
 import { getArticleById } from "@/lib/articles"
@@ -11,7 +10,6 @@ export async function EditArticlePanel({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  await connection()
   const article = await getArticleById(id)
 
   if (!article) {
