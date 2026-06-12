@@ -39,6 +39,7 @@ type ArticleFormProps = {
   article?: {
     id: string
     title: string
+    authorName: string | null
     excerpt: string | null
     content: string
     published: boolean
@@ -65,6 +66,16 @@ export function ArticleForm({ mode, article }: ArticleFormProps) {
           name="title"
           defaultValue={article?.title ?? ""}
           required
+          disabled={pending}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="authorName">Author</Label>
+        <Input
+          id="authorName"
+          name="authorName"
+          defaultValue={article?.authorName ?? ""}
           disabled={pending}
         />
       </div>

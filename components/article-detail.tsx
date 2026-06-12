@@ -13,6 +13,15 @@ function formatDate(date: Date | null) {
   }).format(date)
 }
 
+function formatArticleMeta(authorName: string | null, publishedAt: Date | null) {
+  const parts = [
+    authorName ? `By ${authorName}` : null,
+    formatDate(publishedAt) || null,
+  ].filter(Boolean)
+
+  return parts.join(" · ")
+}
+
 export async function ArticleDetail({
   params,
 }: {
@@ -25,6 +34,8 @@ export async function ArticleDetail({
     notFound()
   }
 
+  const meta = formatArticleMeta(article.authorName, article.publishedAt)
+
   return (
     <article className="space-y-6">
       <header className="space-y-2">
@@ -35,9 +46,9 @@ export async function ArticleDetail({
           ← Articles
         </Link>
         <h1 className="text-3xl font-medium tracking-tight">{article.title}</h1>
-        <p className="text-sm text-muted-foreground">
-          {formatDate(article.publishedAt)}
-        </p>
+        {meta ? (
+          <p className="text-sm text-muted-foreground">{meta}</p>
+        ) : null}
         {article.excerpt ? (
           <p className="text-sm leading-7 text-muted-foreground">
             {article.excerpt}

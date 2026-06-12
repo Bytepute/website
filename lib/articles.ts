@@ -23,6 +23,7 @@ export async function getPublishedArticles() {
       id: true,
       title: true,
       slug: true,
+      authorName: true,
       excerpt: true,
       publishedAt: true,
     },

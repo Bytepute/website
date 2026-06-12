@@ -16,6 +16,7 @@ model Article {
   id          String    @id @default(cuid())
   title       String
   slug        String    @unique
+  authorName  String?
   excerpt     String?
   content     String    @db.Text
   published   Boolean   @default(false)

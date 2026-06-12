@@ -11,6 +11,15 @@ function formatDate(date: Date | null) {
   }).format(date)
 }
 
+function formatArticleMeta(authorName: string | null, publishedAt: Date | null) {
+  const parts = [
+    authorName ? `By ${authorName}` : null,
+    formatDate(publishedAt) || null,
+  ].filter(Boolean)
+
+  return parts.join(" · ")
+}
+
 export async function RecentArticles() {
   const articles = await getPublishedArticles()
   const recent = articles.slice(0, 5)
@@ -33,7 +42,7 @@ export async function RecentArticles() {
             <p className="text-sm text-muted-foreground">{article.excerpt}</p>
           ) : null}
           <p className="text-xs text-muted-foreground">
-            {formatDate(article.publishedAt)}
+            {formatArticleMeta(article.authorName, article.publishedAt)}
           </p>
         </li>
       ))}
@@ -65,7 +74,7 @@ export async function ArticlesList() {
             <p className="text-sm text-muted-foreground">{article.excerpt}</p>
           ) : null}
           <p className="text-xs text-muted-foreground">
-            {formatDate(article.publishedAt)}
+            {formatArticleMeta(article.authorName, article.publishedAt)}
           </p>
         </li>
       ))}

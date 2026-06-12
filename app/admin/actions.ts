@@ -65,6 +65,7 @@ export async function createArticleAction(
   await requireAdmin()
 
   const title = String(formData.get("title") ?? "").trim()
+  const authorName = String(formData.get("authorName") ?? "").trim()
   const excerpt = String(formData.get("excerpt") ?? "").trim()
   const content = String(formData.get("content") ?? "").trim()
   const published = formData.get("published") === "on"
@@ -79,6 +80,7 @@ export async function createArticleAction(
     data: {
       title,
       slug,
+      authorName: authorName || null,
       excerpt: excerpt || null,
       content,
       published,
@@ -98,6 +100,7 @@ export async function updateArticleAction(
 
   const id = String(formData.get("id") ?? "")
   const title = String(formData.get("title") ?? "").trim()
+  const authorName = String(formData.get("authorName") ?? "").trim()
   const excerpt = String(formData.get("excerpt") ?? "").trim()
   const content = String(formData.get("content") ?? "").trim()
   const published = formData.get("published") === "on"
@@ -119,6 +122,7 @@ export async function updateArticleAction(
     data: {
       title,
       slug,
+      authorName: authorName || null,
       excerpt: excerpt || null,
       content,
       published,
